@@ -432,3 +432,18 @@ class Component(EntitySelector):
         #print aa_residue.unit_id(), diff
         if diff <= defs.tilt_cutoff[aa_residue.sequence]:
             return "stacked"
+    
+    def distance_metrics(self, aa_residue):
+        squared_xy_dist_list = []
+        aa_z_list = []
+        base_coord = self.centers["base"]
+        for aa_atom in aa_residue.atoms(name=defs.aa_fg[aa_residue.sequence]):
+            try:
+                aa_x = np.subtract(aa_atom.x, base_coord[0])
+                aa_y= np.subtract(aa_atom.y, base_coord[1])
+                aa_z = np.subtract(aa_atom.z, base_coord[2])
+                squared_xy_dist = (aa_x**2) + (aa_y**2)
+                squared_xy_dist_list.append(squared_xy_dist)
+                aa_z_list.append(aa_z)
+            except:
+                print "Incomplete residue"
