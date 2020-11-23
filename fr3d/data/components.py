@@ -94,7 +94,7 @@ class Component(EntitySelector):
 
     def __init__(self, atoms, pdb=None, model=None, type=None, chain=None,
                  symmetry=None, sequence=None, number=None, index=None,
-                 insertion_code=None, polymeric=None, alt_id=None, inferhydrogens=True):
+                 insertion_code=None, polymeric=None, alt_id=None, inferhydrogens=False):
         """Create a new Component.
 
         :atoms: The atoms this component is composed of.
@@ -260,7 +260,7 @@ class Component(EntitySelector):
             if len(R) != len(S):
                 print("%s Rotation matrix calculation failed, sizes %d and %d" % (self.unit_id(),len(R),len(S)))
             elif len(R) < 3:
-                print("%s Rotation matrix calculation failed, %d new atoms" % (self.unit_id(),len(R)))
+                print("%s Rotation matrix calculation failed, %d base atoms" % (self.unit_id(),len(R)))
             elif len(S) < 3:
                 print("%s Rotation matrix calculation failed, %d standard atoms" % (self.unit_id(),len(S)))
             else:
